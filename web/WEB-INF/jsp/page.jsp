@@ -18,14 +18,17 @@
     <body>
        
         <jsp:include page="head.jsp"/>
-        <div class="container">
+        <div class="container" align="center">
         <h1>${message}</h1>
         <br/>
         <h1>${message1}</h1>
         </div>
         
-        <a href="register">Please Register</a>
-
+        <div align="center">
+        <a href="register">Please Register</a><br/>
+        <a href="customers/all">Show Customer</a><br/>
+        <a href="product/all">Show Product</a>
+        </div>
     </body>
 
 </html>
