@@ -5,7 +5,11 @@
  */
 package com.valensi.controller;
 
+import com.valensi.dao.UserService;
+import com.valensi.diggestEnkripsi.PasswordDiggest;
 import com.valensi.formbean.RegisterFormbean;
+import com.valensi.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/register")
 public class RegistrationController {
+    
+    @Autowired
+    UserService us;
    
     @RequestMapping() 
     public String registerForm(Model model) {
@@ -30,8 +37,17 @@ public class RegistrationController {
     @RequestMapping(value="/save") 
     public String saveRegistration(@ModelAttribute("registerBean") RegisterFormbean registerBean, 
             Model model) {
-        System.out.println("User Firtname: " + registerBean.getFirstName());
+        User user = new User();
+        String encryptedPassword = 
+                PasswordDiggest.createEncryptedPassword(registerBean.getPassword());
+        user.setFirstName(registerBean.getFirstName());
+        user.setLastName(registerBean.getLastName());
+        user.setUsername(registerBean.getUsername());
+        user.setPassword(encryptedPassword);
+        
+        us.saveUser(user);
+        
         model.addAttribute("data", registerBean);
         return "successregistration";
     }
-}
+  }

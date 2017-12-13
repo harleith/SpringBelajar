@@ -1,10 +1,11 @@
 <%-- 
-    Document   : succsesregistration
-    Created on : Dec 12, 2017, 4:46:36 PM
+    Document   : successlogin
+    Created on : Dec 13, 2017, 9:52:33 PM
     Author     : user
 --%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,11 +16,8 @@
     <body>
         <jsp:include page="head.jsp"/> 
         <div class="container">
-            <h1>Registrasi berhasil</h1>
-            ${data.firstName} ${data.lastName}
-            <p>
-                <a href="${pageContext.request.contextPath}/login">Please Login</a>
-            </p>
+            <h1>${user.username}, Anda berhasil Login</h1>
         </div>
     </body>
 </html>
+

@@ -46,6 +46,7 @@
                     <th>Product Id</th>
                     <th>Nama</th>
                     <th>Ketersediaan</th>
+                    <th> </th>
                 </tr>
 
                 <c:forEach var="c" items="${product}">
@@ -53,6 +54,11 @@
                         <td> ${c.productId}</td>
                         <td> ${c.description}</td>
                         <td> ${c.available} </td>
+                        <td> <div>
+                                <a href="#" class="btn btn-info" role="button">update</a>
+                                <a href="#" class="btn btn-info" role="button">delete</a>
+                            </div>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>

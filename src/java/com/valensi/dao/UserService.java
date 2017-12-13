@@ -16,17 +16,18 @@ import org.apache.tomcat.jni.User;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@Transactional
+@org.springframework.transaction.annotation.Transactional
 public class UserService {
     
     
+
     @PersistenceUnit
     EntityManagerFactory emf;
-        
+
     private EntityManager em;
 
-    @Transactional
-    public void saveUser(User user) {
+    @org.springframework.transaction.annotation.Transactional
+    public void saveUser(com.valensi.model.User user) {
         em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(user);
@@ -34,29 +35,31 @@ public class UserService {
         em.close();
     }
 
-    public User findByUsername(String username) {
-        User user = new User();
+    public com.valensi.model.User findByUsername(String username) {
+        com.valensi.model.User user = new com.valensi.model.User();
         try {
             em = emf.createEntityManager();
             Query query = em.createQuery("Select u from User u where u.username = :username");
             query.setParameter("username", username);
-            user = (User) query.getSingleResult();
+            user = (com.valensi.model.User) query.getSingleResult();
         } catch (NoResultException nre) {
             java.util.logging.Logger.getLogger(username).log(Level.SEVERE, username, nre);
         }
         return user;
     }
+
     /**
      * @return the em
      */
     public EntityManager getEm() {
         return em;
     }
+
     /**
      * @param em the em to set
      */
     public void setEm(EntityManager em) {
         this.em = em;
     }
-    
+
 }
